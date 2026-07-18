@@ -1,0 +1,30 @@
+---
+- name: Configuration automatisee du serveur Web Docker
+  hosts: serveurs_web
+  become: yes
+
+  tasks:
+    - name: Étape 1 - S'assurer que le dossier du projet existe
+      file:
+        path: /home/ranja/ansible-docker-web
+        state: directory
+        mode: '0755'
+        owner: ranja
+
+    - name: Étape 2 - Créer le fichier docker-compose.yml au bon endroit
+      copy:
+        dest: /home/ranja/ansible-docker-web/docker-compose.yml
+        content: |
+          version: '3.8'
+          services:
+            web-server-ansible:
+              image: nginx:latest
+              container_name: web_by_ansible
+              ports:
+                - "8090:80"
+
+    - name: Étape 3 - Lancer Docker Compose via le terminal
+      shell: docker-compose up -d
+      args:
+        chdir: /home/ranja/ansible-docker-web
+
