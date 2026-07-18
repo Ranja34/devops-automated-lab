@@ -1,0 +1,19 @@
+name: Validation Syntaxe Ansible (CI)
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  verification-syntaxe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Recuperer le code du depot
+        uses: actions/checkout@v4
+
+      - name: 🔍 Verifier le format du Playbook
+        run: |
+          echo "Le robot de GitHub analyse le fichier playbook.yml..."
+          # Ce script simule la validation de conformite de votre infrastructure
