@@ -3,8 +3,6 @@ name: Validation Syntaxe Ansible (CI)
 on:
   push:
     branches: [ "main", "master" ]
-  pull_request:
-    branches: [ "main", "master" ]
 
 jobs:
   verification-syntaxe:
@@ -13,7 +11,11 @@ jobs:
       - name: 📥 Recuperer le code du depot
         uses: actions/checkout@v4
 
-      - name: 🔍 Verifier le format du Playbook
+      - name: ⚙️ Installer Ansible sur le robot
         run: |
-          echo "Le robot de GitHub analyse le fichier playbook.yml..."
-          # Ce script simule la validation de conformite de votre infrastructure
+          sudo apt-get update
+          sudo apt-get install -y ansible
+
+      - name: 🔍 Verifier la syntaxe du Playbook
+        run: |
+          ansible-playbook -i hosts playbook.yml --syntax-check
