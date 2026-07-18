@@ -13,24 +13,25 @@ Ce projet documente la mise en place d'une infrastructure automatisée et sécur
 2. Exportation de la clé publique via `ssh-copy-id`.
 3. Validation de la connexion sécurisée sans mot de passe.
 
-## 🐳 Étape 2 : Conteneurisation de l'infrastructure avec Docker
+# DevOps Automated Lab - Étape 2 : Conteneurisation de l'Infrastructure
 
-L'application a été migrée d'un modèle monolithique vers une architecture conteneurisée pour garantir la portabilité et l'isolation des composants.
+L'application web a été migrée avec succès d'un modèle monolithique vers une architecture conteneurisée isolée.
 
-### 📦 Composants déployés
-* **Moteur de conteneurisation :** Docker Community Edition
-* **Gestionnaire de déploiement :** Docker-Compose
-* **Image utilisée :** Official Nginx (Tag: `latest`)
+## Spécifications Docker
+* **Moteur de conteneurisation :** Docker Engine & Docker-Compose
+* **Image :** Nginx (Tag: `latest`)
+* **Nom du conteneur :** `web_container`
 
-### 🔌 Gestion des flux réseaux (Mapping)
-* **Port Hôte (VM) :** 8080
-* **Port Conteneur :** 80
-* **Flux :** Le trafic entrant sur le port 8080 de la VM est automatiquement redirigé vers le port 80 isolé du conteneur.
+##  Cartographie des Ports Réseau
+* **Port externe (VM) :** `8080`
+* **Port interne (Conteneur) :** `80`
+* **Mécanisme :** Le trafic arrivant sur le réseau privé hôte (`192.168.50.10:8080`) est acheminé vers le port `80` du conteneur Docker.
 
-### 🚀 Commande de déploiement accéléré
+## Commande d'exécution
 ```bash
 docker-compose up -d
 ```
 
-## 📈 Prochaine Étape
-Semaine 3 : Automatisation de toute l'installation (Docker + Configuration) avec Ansible.
+## Prochaine Étape
+Semaine 3 : Automatisation globale du déploiement du serveur et de Docker via un Playbook **Ansible**.
+
