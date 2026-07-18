@@ -32,6 +32,23 @@ L'application web a été migrée avec succès d'un modèle monolithique vers un
 docker-compose up -d
 ```
 
-## Prochaine Étape
-Semaine 3 : Automatisation globale du déploiement du serveur et de Docker via un Playbook **Ansible**.
+## Étape 3 : Infrastructure as Code (IaC) avec Ansible
+
+Déploiement et gestion de l'infrastructure entièrement industrialisés via Ansible, éliminant les configurations manuelles.
+
+### Spécifications et Résolution d'Incidents
+* **Outil utilisé :** Ansible Core (v2.10)
+* **Stratégie d'automatisation :** Utilisation d'un inventaire local (`hosts`) et d'un Playbook YAML impératif (`playbook.yml`).
+* **Gestion du Versioning :** Afin de pallier les conflits de dépréciation entre les collections Docker modernes et le moteur système, le playbook implémente une approche hybride robuste via le module natif `shell`.
+
+### Actions exécutées par le Playbook
+1. **Idempotence :** Vérification et création de l'arborescence des répertoires du projet.
+2. **Provisioning :** Écriture dynamique du descripteur d'architecture `docker-compose.yml`.
+3. **Orchestration :** Initialisation et exécution à distance du conteneur applicatif Nginx isolé sur le port `8090`.
+
+### Commande de provisionnement
+```bash
+ansible-playbook -i hosts playbook.yml
+```
+
 
